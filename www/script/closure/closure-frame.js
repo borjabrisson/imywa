@@ -1,18 +1,16 @@
-(function($, undefined) {	$.extend( {'currentFrame':{
-	
-	// Attributes	
+(function($, undefined) {
+
+$.ia.frame= {
 	form: '',
 	id: null,
 	
-	// Methods
-	OnCreate: function(form, id){
-		this.form= form;
+	create: function(form, id){
+		this.form= from;
 		this.id= id;
 	},
-
-	Specific: function(){
-	},
-
+	
+	Specific: function(){},
+		
 	OnLoad: function(){
 		//Error: El selector en jquery es diferente. primero se selecciona el id y luego se hace un filtro.
 		//$("#" + this.id).children(".resize").resizable({handles:"s"});
@@ -67,6 +65,9 @@
 			// El peligro esta en la posición del boton, puede añadirse mas botones. Solucion ponerle una clase generica "header" y buscarlo cm padre.
 		});
 	}
+};
 
-}});}) (jQuery);
+
+
+}) (jQuery);
 
