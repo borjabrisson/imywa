@@ -19,18 +19,20 @@ along with imywa.  If not, see <http://www.gnu.org/licenses/>.
 */
 class bas_html_page{
 
+	public $title;
+	public $language;
+	public $theme;
 	public $styles= array();
 	public $scripts= array();
-	public $title;
-	public $jsClass;
-	public $theme;
+	
+//	public $jsClass;
 
 	private $_openDivs= array();
 
 	public function __construct(){
 		global $_SESSION;
 		if (isset($_SESSION) && $_SESSION->theme) $this->setTheme($_SESSION->theme);
-		$this->jsClass= get_class($this);
+//		$this->jsClass= get_class($this);
 	}
 	
 // Themes	

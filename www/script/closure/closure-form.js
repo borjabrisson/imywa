@@ -270,10 +270,13 @@ $.ia.form= {
 					$(data.contents[content].selector).html(data.contents[content].content);
 	
 			}
-			var currentFormClass= window[data.currentForm]; 
+			//currentForm= $.extend(JSON.parse(data.currentFormAttributes), $.ia.form);
+			//currentForm= $.extend(JSON.parse(data.currentFormAttributes), window["$.ia.form"]);
+			currentForm= $.extend(JSON.parse(data.currentFormAttributes), window["$." + data.currentForm]); //data.currentForm = "ia.form" by default
+/*			var currentFormClass= window[data.currentForm]; 
 			currentForm= new currentFormClass();
 			bas_copyAttributes(JSON.parse(data.currentFormAttributes), currentForm);
-			currentForm.OnLoad();
+*/			currentForm.OnLoad();
 			break;
 			
 		case "reloadList":
