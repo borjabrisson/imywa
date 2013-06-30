@@ -26,9 +26,9 @@ class bas_frmx_panelGrid {
 	public $grid;
 	public $components=array();
 	
-	public $classMain;
-	public $classSuper;
-	public $classSub;
+	public $classMain; // what's that ? it is not used on code.
+	public $classSuper; //?
+	public $classSub; //?
 	public $id;
 	
 	protected $mode;
@@ -45,6 +45,8 @@ class bas_frmx_panelGrid {
 		$this->type = "gridPanel";
 	}
 	
+// Beware with the cut and paste. We are including ghost code which never are going to be executed.
+// setMode, getMode, uploadFile, ...
 	public function SetMode($mode="edit"){
 		switch ($mode){
 			case "edit":case "read": // ### en el caso del new, ¿tenemos que limpiar el contenido del current? (si)
@@ -98,16 +100,32 @@ class bas_frmx_panelGrid {
 		return NULL;
 	}
 	
-	public function OnPaint($mainGrid=""){
+	public function OnPaint($mainGrid=""){ // ¿que es maingrid? Parece ser el identificador del FrameGrid al que pertenece el PanelGrid
 		$html = new bas_html_panelGrid($this);
 		$html->OnPaint($mainGrid);	
 	}
 	
-	public function addComponent($y=0, $x=0, $field_id,$caption,$event=""){
+	public function addComponent($y=0, $x=0, $field_id,$caption,$event="",$subItem=""){
         if (!$event) $event = $this->gnrEvent;
-		$this->components[$y][$x] = array("x"=>$x,"y"=>$y,"id"=>$field_id,"caption"=>$caption,"event"=>$event);
+		$this->components[$y][$x] = array("x"=>$x,"y"=>$y,"id"=>$field_id,"caption"=>$caption,"subItem"=>$subItem,"event"=>$event);
 	}
 	
+	public function setAttrPos($x,$y,$attr,$value){
+		if (isset($this->components[$y][$x])) $this->components[$y][$x][$attr] = $value;
+	}
+	
+	public function setAttrId($id,$attr,$value){
+		for ($row = 0; $row < $this->grid["height"]; $row++){
+			for($column = 0; $column < $this->grid["width"]; $column++){
+				if (isset($this->components[$row][$column])){
+					if($this->components[$row][$column]["id"] == $id){ 
+						$this->components[$row][$column][$attr] = $value;
+						break;
+					}
+				}
+			}
+		}
+	}
 	
 	public function delComponent($id){
         foreach($this->components as $item => $component){
